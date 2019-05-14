@@ -20,7 +20,7 @@ const TodoList = observer((props) => {
   }
 
   const handleComplete = (todo) => {
-    todo.complete = !todo.complete
+    props.store.markCompleted(todo)
   }
 
   const handleFilter = (e) => {

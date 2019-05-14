@@ -1,4 +1,4 @@
-import { computed, decorate, observable } from 'mobx'
+import { action, computed, decorate, observable } from 'mobx'
 
 class Todo {
   constructor(label) {
@@ -31,12 +31,18 @@ class TodoStore {
     const incompletedTodos = this.todos.filter(todo => !todo.complete)
     this.todos.replace(incompletedTodos)
   }
+
+  markCompleted = (todo) => {
+    this.todos.find(t => t === todo).complete = true
+  }
 }
+
 
 decorate(TodoStore, {
   todos: observable,
   filter: observable,
-  filteredTodos: computed
+  filteredTodos: computed,
+  markCompleted: action
 })
 
 let store = window.store = new TodoStore()
